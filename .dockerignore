@@ -1,0 +1,7 @@
+*.swp
+.dockerignore
+.git/
+.gitignore
+Dockerfile
+README.md
+compose.yaml

@@ -1,0 +1,16 @@
+services:
+  tf:
+    build:
+      context: .
+      labels:
+        io.whalebrew.name: 'tf'
+        io.whalebrew.required_version: '>0.3.0'
+        #io.whalebrew.config.environment: '["TERM", "FOOBAR_NAME"]'
+        #io.whalebrew.config.keep_container_user: 'true'
+        #io.whalebrew.config.missing_volumes: 'error' # Possible values are: 'error' | 'skip' | 'mount'
+        #io.whalebrew.config.networks: '["host"]'
+        #io.whalebrew.config.ports: '["8100:8100"]'
+        #io.whalebrew.config.volumes: '["~/.docker:/root/.docker:ro"]'
+        #io.whalebrew.config.volumes_from_args: '["-C", "--exec-path"]'
+        #io.whalebrew.config.working_dir: '${PWD}'
+    image: matefarkas/whalebrew-tf
