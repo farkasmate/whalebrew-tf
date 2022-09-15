@@ -17,6 +17,7 @@ ARG TERRAFORM_COMPLIANCE_VERSION
 ARG TERRAFORM_DOCS_VERSION
 ARG TERRAGRUNT_VERSION
 ARG TFENV_VERSION
+ARG TFLINT_VERSION
 
 COPY --from=BUILDER /usr/local/bundle /usr/local/bundle
 
@@ -42,7 +43,13 @@ RUN apk add --no-cache \
   && curl https://raw.githubusercontent.com/gruntwork-io/terragrunt/v${TERRAGRUNT_VERSION}/LICENSE.txt -sLo /opt/terragrunt/LICENSE.txt \
   && chmod a+x /opt/terragrunt/terragrunt \
   # tfenv
-  && git clone --quiet --config advice.detachedHead=false --depth=1 --branch "v${TFENV_VERSION}" https://github.com/tfutils/tfenv.git /opt/tfenv
+  && git clone --quiet --config advice.detachedHead=false --depth=1 --branch "v${TFENV_VERSION}" https://github.com/tfutils/tfenv.git /opt/tfenv \
+  # tflint
+  && mkdir -p /opt/tflint \
+  && curl https://github.com/terraform-linters/tflint/releases/download/v${TFLINT_VERSION}/tflint_linux_amd64.zip -sLo /tmp/tflint_linux_amd64.zip \
+  && unzip /tmp/tflint_linux_amd64.zip -d /opt/tflint \
+  && rm /tmp/tflint_linux_amd64.zip \
+  && curl https://raw.githubusercontent.com/terraform-linters/tflint/v${TFLINT_VERSION}/LICENSE -sLo /opt/tflint/LICENSE
 
 ADD entrypoint.rb /entrypoint.rb
 ADD toys/ /toys/

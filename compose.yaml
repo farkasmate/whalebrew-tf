@@ -8,13 +8,15 @@ services:
         TERRAFORM_DOCS_VERSION: '0.16.0'
         TERRAGRUNT_VERSION: '0.38.12'
         TFENV_VERSION: '3.0.0'
+        TFLINT_VERSION: '0.40.0'
       context: .
       labels:
         io.whalebrew.name: 'tf'
         io.whalebrew.required_version: '>0.3.0'
         io.whalebrew.config.environment: |
           [
-            "PATH=/opt/terrafile:/opt/terraform-docs:/opt/terragrunt:/opt/tfenv/bin:/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+            "PATH=/opt/terrafile:/opt/terraform-docs:/opt/terragrunt:/opt/tfenv/bin:/opt/tflint:/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+            "TFLINT_PLUGIN_DIR=/opt/tflint/plugins",
             "TF_PLUGIN_CACHE_DIR=/opt/terraform-plugin-cache",
             "TF_VERBOSE",
           ]
@@ -27,6 +29,7 @@ services:
             "~/.terraform.d/plugin-cache:/opt/terraform-plugin-cache:rw",
             "~/.tfenv/version:/opt/tfenv/version:rw",
             "~/.tfenv/versions:/opt/tfenv/versions:rw",
+            "~/.tflint.d:/opt/tflint/plugins:rw",
           ]
         #io.whalebrew.config.volumes_from_args: '["-C", "--exec-path"]'
         #io.whalebrew.config.working_dir: '${PWD}'

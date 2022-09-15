@@ -17,6 +17,7 @@ def run
         compliance         Lightweight, security focused, BDD test framework against Terraform
         docs               Generate documentation from Terraform modules
         grunt              A thin wrapper for Terraform that provides extra tools for working with multiple Terraform modules
+        lint               A Pluggable Terraform Linter
         terrafile          Manage external Terraform modules from GitHub
         tfenv              Terraform version manager
   MISC
