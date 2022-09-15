@@ -14,6 +14,7 @@ def run
   puts <<~MISC
 
     Misc commands:
+        docs               Generate documentation from Terraform modules
         tfenv              Terraform version manager
   MISC
 end

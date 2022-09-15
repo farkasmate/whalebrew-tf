@@ -3,11 +3,12 @@ services:
     build:
       args:
         RUBY_VERSION: '3.0.4'
+        TERRAFORM_DOCS_VERSION: '0.16.0'
       context: .
       labels:
         io.whalebrew.name: 'tf'
         io.whalebrew.required_version: '>0.3.0'
-        io.whalebrew.config.environment: '["PATH=/opt/tfenv/bin:/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin", "TF_VERBOSE"]'
+        io.whalebrew.config.environment: '["PATH=/opt/terraform-docs:/opt/tfenv/bin:/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin", "TF_VERBOSE"]'
         #io.whalebrew.config.keep_container_user: 'true'
         #io.whalebrew.config.missing_volumes: 'error' # Possible values are: 'error' | 'skip' | 'mount'
         #io.whalebrew.config.networks: '["host"]'
