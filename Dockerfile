@@ -15,6 +15,7 @@ FROM ruby:${RUBY_VERSION}-alpine as CLI
 ARG TERRAFILE_VERSION
 ARG TERRAFORM_COMPLIANCE_VERSION
 ARG TERRAFORM_DOCS_VERSION
+ARG TERRAGRUNT_VERSION
 ARG TFENV_VERSION
 
 COPY --from=BUILDER /usr/local/bundle /usr/local/bundle
@@ -35,6 +36,11 @@ RUN apk add --no-cache \
   && mkdir -p /opt/terraform-docs/ \
   && curl https://github.com/terraform-docs/terraform-docs/releases/download/v${TERRAFORM_DOCS_VERSION}/terraform-docs-v${TERRAFORM_DOCS_VERSION}-Linux-amd64.tar.gz -sLo - \
     | tar xz -C /opt/terraform-docs/ \
+  # terragrunt
+  && mkdir -p /opt/terragrunt/ \
+  && curl https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64 -sLo /opt/terragrunt/terragrunt \
+  && curl https://raw.githubusercontent.com/gruntwork-io/terragrunt/v${TERRAGRUNT_VERSION}/LICENSE.txt -sLo /opt/terragrunt/LICENSE.txt \
+  && chmod a+x /opt/terragrunt/terragrunt \
   # tfenv
   && git clone --quiet --config advice.detachedHead=false --depth=1 --branch "v${TFENV_VERSION}" https://github.com/tfutils/tfenv.git /opt/tfenv
 
