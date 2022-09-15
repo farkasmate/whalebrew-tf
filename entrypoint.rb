@@ -5,29 +5,14 @@ require 'colorize'
 require 'toys-core'
 require 'toys/utils/exec'
 
-def exec_with_args(cmd, args)
-  args.delete_at(args.index('--') || args.length)
+def exec_with_args(cmd, args = [])
   final_cmd = "#{cmd} #{args.join(' ')}"
 
   warn "Running: #{final_cmd}".yellow if ENV['TF_VERBOSE']
   exec final_cmd
 end
 
-cli = Toys::CLI.new(
-  executable_name: 'tf',
-  middleware_stack: [
-    Toys::Middleware.spec(
-      :handle_usage_errors
-    ),
-    Toys::Middleware.spec(
-      :show_help,
-      help_flags: ['-h', '--help'],
-      default_recursive: true,
-      fallback_execution: true,
-      stream: $stderr
-    )
-  ]
-)
+cli = Toys::CLI.new(executable_name: 'tf')
 
 toys_dir = if File.exist? '/.dockerenv'
              '/toys'
@@ -35,6 +20,7 @@ toys_dir = if File.exist? '/.dockerenv'
              'toys'
            end
 
+cli.add_config_path File.join(toys_dir, '_terraform.rb')
 cli.add_config_path toys_dir
 
 exit(cli.run(*ARGV))

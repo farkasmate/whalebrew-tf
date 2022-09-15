@@ -2,6 +2,8 @@
 
 desc 'Run debug shell'
 
+include :exec, exit_on_nonzero_status: true
+
 def run
-  exec 'sh'
+  exec_with_args 'sh'
 end

@@ -2,7 +2,9 @@
 
 desc 'Terraform version manager'
 
-remaining_args :args
+include :exec, exit_on_nonzero_status: true
+
+disable_argument_parsing
 
 def run
   exec_with_args 'tfenv', args
