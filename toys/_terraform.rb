@@ -15,6 +15,7 @@ def run
 
     Misc commands:
         docs               Generate documentation from Terraform modules
+        terrafile          Manage external Terraform modules from GitHub
         tfenv              Terraform version manager
   MISC
 end
