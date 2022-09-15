@@ -4,6 +4,7 @@ services:
       args:
         RUBY_VERSION: '3.0.4'
         TERRAFILE_VERSION: '0.7'
+        TERRAFORM_COMPLIANCE_VERSION: '1.3.33'
         TERRAFORM_DOCS_VERSION: '0.16.0'
         TFENV_VERSION: '3.0.0'
       context: .

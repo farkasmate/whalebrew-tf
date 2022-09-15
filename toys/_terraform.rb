@@ -14,6 +14,7 @@ def run
   puts <<~MISC
 
     Misc commands:
+        compliance         Lightweight, security focused, BDD test framework against Terraform
         docs               Generate documentation from Terraform modules
         terrafile          Manage external Terraform modules from GitHub
         tfenv              Terraform version manager
