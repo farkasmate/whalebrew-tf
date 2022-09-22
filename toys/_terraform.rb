@@ -6,20 +6,21 @@ include :exec, exit_on_nonzero_status: false
 
 disable_argument_parsing
 
-def run
+def run # rubocop:disable Metrics/AbcSize
   exec_with_args 'terraform', args
 
   return unless (args - ['-h', '-help', '--help', 'help']).empty?
 
-  puts <<~MISC
+  puts "\nMisc commands:"
 
-    Misc commands:
-        compliance         Lightweight, security focused, BDD test framework against Terraform
-        docs               Generate documentation from Terraform modules
-        grunt              A thin wrapper for Terraform that provides extra tools for working with multiple Terraform modules
-        lint               A Pluggable Terraform Linter
-        sec                Security scanner for your Terraform code
-        terrafile          Manage external Terraform modules from GitHub
-        tfenv              Terraform version manager
-  MISC
+  tools = cli.loader.list_subtools(tool_name).collect do |tool|
+    { tool.full_name.join(' ') => tool.desc.to_s }
+  end.reduce({}, &:merge)
+
+  max_length = [12, *tools.keys.map(&:size)].max
+
+  tools.sort.to_h.each do |name, description|
+    pad = ' ' * (max_length - name.length)
+    puts "  #{name}#{pad}  #{description}"
+  end
 end
